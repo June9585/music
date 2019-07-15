@@ -1,10 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-Vue.use(Vuex);
+import music from "./modules/music";
 
+Vue.use(Vuex);
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {}
+  modules: {
+    music
+  }
 });

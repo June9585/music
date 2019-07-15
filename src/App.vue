@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view />
   </div>
 </template>
+<script>
+import { mapActions, mapState, mapGetters } from "vuex";
+export default {
+  created() {
+    this.actMusicall();
+  },
+  methods: {
+    ...mapActions("music", ["actMusicall"])
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
