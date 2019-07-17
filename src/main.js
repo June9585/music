@@ -5,7 +5,7 @@ import store from "@/store/index";
 
 import { Loading } from 'element-ui';
 
-import { Button, Swipe, SwipeItem, NavBar, Icon,PullRefresh   } from "vant";
+import { Button, Swipe, SwipeItem, NavBar, Icon,PullRefresh ,Tabbar, TabbarItem ,Toast } from "vant";
 import "vant/lib/index.css";
 
 Vue.use(Button)
@@ -14,7 +14,10 @@ Vue.use(Button)
   .use(NavBar)
   .use(Icon)
   .use(Loading)
-  .use(PullRefresh);
+  .use(PullRefresh)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Toast);
 Vue.config.productionTip = false;
 
 new Vue({

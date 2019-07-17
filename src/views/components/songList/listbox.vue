@@ -15,7 +15,7 @@
       <ul class="items padding-box">
         <li class="item" v-for="(item,index) in list " :key="index">
           <div class="image-box">
-            <div>
+            <div class="img_box">
               <img :src="item.pic" alt />
             </div>
             <div class="overlay"></div>
@@ -28,7 +28,6 @@
             </div>
           </div>
         </li>
-       
       </ul>
     </div>
   </div>
@@ -50,6 +49,7 @@ export default {
 <style lang="scss" scoped>
 .home-songlist-view {
   margin-top: 5vw;
+  margin-bottom: 5vw;
 }
 .m-title {
   padding-left: 30px;
@@ -75,7 +75,7 @@ export default {
   img {
     width: auto;
     height: 4px;
-    background: #e5e5ee
+    background: #e5e5ee;
   }
 }
 
@@ -98,8 +98,14 @@ export default {
   width: 100%;
   padding-top: 5px;
   position: relative;
-  img {
-    width: 100%;
+  .img_box {
+    width: 10rem;
+    height: 10rem;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
   }
 }
 
@@ -122,6 +128,6 @@ export default {
 .padding-box {
   overflow: auto;
   white-space: nowrap;
-  padding-bottom: 22px;
+  // padding-bottom: 22px;
 }
 </style>

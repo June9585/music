@@ -17,11 +17,11 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/components/MusicPages")
     },
-    // {
-    //   path: "/anli",
-    //   name: "anli",
-    //   component: () =>
-    //     import(/* webpackChunkName: "about" */ "./views/components/songList/anli.vue")
-    // }
+    {
+      path: "/Music",
+      name: "Music",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./components/Music/index.vue")
+    }
   ]
 });

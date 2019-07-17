@@ -17,28 +17,30 @@
           class="panel-songslist-item"
           v-for="(item,index) in this.listdatamuss.length> 0 ? this.listdatamuss: list"
           :key="index"
-          @click="songName(item.__ob__.dep.id)"
+          @click="songNamelist(item)"
         >
+          <!-- @click="thiscurrentSong(item)" -->
           <div class="panel-songs-item-name">
-            <span class="panel_title">{{item.title}} &nbsp; -- &nbsp;</span>
-            <span>{{item.author}}</span>
+            <span class="panel_title">{{index+1}}&nbsp;</span>
+            <span class="panel_title">{{item.title}}</span>
           </div>
-          <div class="panel-songs-item-download" @click="songName(item.url)">
+          <div class="panel-songs-item-download">
             <span class="spang">
-              <van-icon name="play-circle-o"></van-icon>
+              <span>{{item.author}}</span>
             </span>
           </div>
         </li>
       </ul>
-      <audio controls ref="audio" src=" " loop="loop" @play="onPlay"></audio>
     </van-pull-refresh>
   </div>
 </template>
 <script>
 import axios from "axios";
+import { mapMutations ,mapState} from "vuex";
 
 export default {
   nsme: "songlist",
+  components: {},
   props: {
     list: {
       type: Array,
@@ -53,47 +55,33 @@ export default {
       fivemuss: [],
       listdatamuss: [],
       url: "",
-      src: ""
+      src: "",
+      far: false
     };
   },
   created() {
     this.actMusicall();
     this.onRefresh();
   },
-  mounted() {},
-  watch: {},
+  computed: {
+    //仓库播放的当前歌曲
+    ...mapState("music", ["currentSong"])
+  },
   methods: {
-    //单个歌曲的id
-    songName(url) {
-      this.onPlay(url);
+   
+     //歌曲的播放
+    songNamelist(mis) {
+      // console.log(mis,"获取列表的数据");
+      // this.$store.commit("music/WhetherToTlay", far);
+      this.$emit("showmusicName", mis);
     },
 
-    onPlay(url) {
-      console.log(url);
-      this.$refs.audio.src = url;
-      this.$refs.audio.play();
-    },
-
-    // 开始播放
-    startPlay() {
-      this.$refs.audio.play();
-    },
-    // 暂停
-    pausePlay() {
-      this.$refs.audio.pause();
-    },
-    // 当音频暂停
-    onPause() {
-      this.audio.playing = false;
-    },
-    // 当发生错误, 就出现loading状态
-    onError() {
-      this.audio.waiting = true;
-    },
+    // onPlay(data) {
+    //   console.log(data);
+    // },
 
     //随机获取
     onRefresh() {
-      console.log(this.list);
       setTimeout(() => {
         let fivemus = [];
         for (var i = 0; i < 7; i++) {
@@ -144,13 +132,9 @@ export default {
 
 
 <style lang="scss" scoped>
-.musicsPlay {
-  height: 20px;
-  // opacity: 0;
-}
 .spang {
-  color: #c4c4c4;
-  font-size: 25px;
+  color: #838383;
+  // font-size: 25px;
 }
 .m-title {
   padding-left: 30px;
@@ -205,6 +189,10 @@ li {
   font-size: 1rem;
   line-height: 65px;
   .panel_title {
+    padding-left: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #585858;
     display: block;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -220,7 +208,7 @@ li {
   position: absolute;
   top: 0;
   right: 0;
-  width: 2.5rem;
+  // width: 2.5rem;
   line-height: 65px;
   padding-right: 20px;
   cursor: pointer;

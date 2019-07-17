@@ -4,26 +4,27 @@
       <van-icon name="search" slot="right" />
     </van-nav-bar>
     <van-swipe :loop="false" class="van_swipe">
-      <van-swipe-item v-for="(item , index) in listmusic" :key="index">    
+      <van-swipe-item v-for="(item , index) in listmusic" :key="index">
         <img :src="item.pic" alt />
       </van-swipe-item>
-    </van-swipe>   
-    <songlist :list="listmusicnoedata" />
-    <Listbox  :list="listmusicnoedata"/>
-    <!-- <Anli /> -->
+    </van-swipe>
+    <songlist :list="listmusicnoedata" @showmusicName="fn1" />
+    <Listbox :list="listmusicnoedata" />
+    <foot @showmusicName="fn1" />
   </div>
 </template>
 
 <script>
 import songlist from "@/views/components/songList/index.vue";
 import Listbox from "@/views/components/songList/listbox.vue";
-// import Anli from "@/views/components/songList/anli.vue";
+import foot from "@/components/footer/index";
 import { mapActions, mapState, mapGetters } from "vuex";
 export default {
   name: "about",
   components: {
     songlist,
-    Listbox
+    Listbox,
+    foot
   },
   data() {
     return {
@@ -32,11 +33,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters("music", ["listmusic", "listmusicnoedata"]),
-    },
+    ...mapGetters("music", ["listmusic", "listmusicnoedata"])
+  },
 
   methods: {
-    ...mapState("music", ["stamusidat", "listmusi"]),
+    fn1(data) {
+      // console.log(12,"首页经过的数据");
+      this.$emit("musicName", data);
+    },
+    ...mapState("music", ["stamusidat", "listmusi"])
   }
 };
 </script>
